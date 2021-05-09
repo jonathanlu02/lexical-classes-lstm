@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 700px;
+            height: 700px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#FF9933", "id": "good", "label": "good", "shape": "dot"}, {"color": "#FF9933", "id": "great", "label": "great", "shape": "dot"}, {"color": "#0066CC", "id": "man", "label": "man", "shape": "dot"}, {"color": "#0066CC", "id": "mother", "label": "mother", "shape": "dot"}, {"color": "#0066CC", "id": "son", "label": "son", "shape": "dot"}, {"color": "#0066CC", "id": "father", "label": "father", "shape": "dot"}, {"color": "#0066CC", "id": "girl", "label": "girl", "shape": "dot"}, {"color": "#0066CC", "id": "sea", "label": "sea", "shape": "dot"}, {"color": "#0066CC", "id": "ocean", "label": "ocean", "shape": "dot"}, {"color": "#FF0000", "id": "come", "label": "come", "shape": "dot"}, {"color": "#FF0000", "id": "got", "label": "got", "shape": "dot"}, {"color": "#FF0000", "id": "go", "label": "go", "shape": "dot"}, {"color": "#FF0000", "id": "know", "label": "know", "shape": "dot"}, {"color": "#0066CC", "id": "thought", "label": "thought", "shape": "dot"}, {"color": "#0066CC", "id": "hey", "label": "hey", "shape": "dot"}, {"color": "#0066CC", "id": "thing", "label": "thing", "shape": "dot"}, {"color": "#0066CC", "id": "family", "label": "family", "shape": "dot"}, {"color": "#0066CC", "id": "friend", "label": "friend", "shape": "dot"}, {"color": "#0066CC", "id": "witch", "label": "witch", "shape": "dot"}, {"color": "#0066CC", "id": "monkey", "label": "monkey", "shape": "dot"}, {"color": "#0066CC", "id": "queen", "label": "queen", "shape": "dot"}, {"color": "#0066CC", "id": "la", "label": "la", "shape": "dot"}, {"color": "#0066CC", "id": "po", "label": "po", "shape": "dot"}, {"color": "#0066CC", "id": "li", "label": "li", "shape": "dot"}, {"color": "#0066CC", "id": "na", "label": "na", "shape": "dot"}, {"color": "#0066CC", "id": "hyena", "label": "hyena", "shape": "dot"}, {"color": "#0066CC", "id": "dog", "label": "dog", "shape": "dot"}, {"color": "#0066CC", "id": "turtle", "label": "turtle", "shape": "dot"}, {"color": "#0066CC", "id": "lion", "label": "lion", "shape": "dot"}, {"color": "#0066CC", "id": "wallaby", "label": "wallaby", "shape": "dot"}, {"color": "#0066CC", "id": "hare", "label": "hare", "shape": "dot"}, {"color": "#FF0000", "id": "said", "label": "said", "shape": "dot"}, {"color": "#0066CC", "id": "king", "label": "king", "shape": "dot"}, {"color": "#0066CC", "id": "moment", "label": "moment", "shape": "dot"}, {"color": "#0066CC", "id": "time", "label": "time", "shape": "dot"}, {"color": "#FF9933", "id": "much", "label": "much", "shape": "dot"}, {"color": "#FF9933", "id": "little", "label": "little", "shape": "dot"}, {"color": "#0066CC", "id": "marlin", "label": "marlin", "shape": "dot"}, {"color": "#0066CC", "id": "dory", "label": "dory", "shape": "dot"}, {"color": "#33CC33", "id": "one", "label": "one", "shape": "dot"}, {"color": "#0066CC", "id": "beast", "label": "beast", "shape": "dot"}, {"color": "#0066CC", "id": "ho", "label": "ho", "shape": "dot"}, {"color": "#0066CC", "id": "wa", "label": "wa", "shape": "dot"}, {"color": "#0066CC", "id": "gon", "label": "gon", "shape": "dot"}, {"color": "#0066CC", "id": "fa", "label": "fa", "shape": "dot"}, {"color": "#0066CC", "id": "way", "label": "way", "shape": "dot"}, {"color": "#0066CC", "id": "xi", "label": "xi", "shape": "dot"}, {"color": "#0066CC", "id": "ha", "label": "ha", "shape": "dot"}]);
+        edges = new vis.DataSet([{"from": "good", "to": "great"}, {"from": "man", "to": "mother"}, {"from": "man", "to": "son"}, {"from": "man", "to": "father"}, {"from": "man", "to": "girl"}, {"from": "sea", "to": "ocean"}, {"from": "come", "to": "got"}, {"from": "come", "to": "go"}, {"from": "know", "to": "thought"}, {"from": "know", "to": "got"}, {"from": "know", "to": "hey"}, {"from": "know", "to": "thing"}, {"from": "know", "to": "go"}, {"from": "mother", "to": "family"}, {"from": "mother", "to": "son"}, {"from": "mother", "to": "father"}, {"from": "mother", "to": "friend"}, {"from": "mother", "to": "girl"}, {"from": "witch", "to": "monkey"}, {"from": "witch", "to": "queen"}, {"from": "la", "to": "po"}, {"from": "la", "to": "li"}, {"from": "la", "to": "na"}, {"from": "monkey", "to": "hyena"}, {"from": "monkey", "to": "dog"}, {"from": "monkey", "to": "turtle"}, {"from": "monkey", "to": "lion"}, {"from": "monkey", "to": "wallaby"}, {"from": "monkey", "to": "hare"}, {"from": "family", "to": "son"}, {"from": "family", "to": "father"}, {"from": "family", "to": "friend"}, {"from": "thought", "to": "said"}, {"from": "thought", "to": "got"}, {"from": "thought", "to": "thing"}, {"from": "king", "to": "queen"}, {"from": "son", "to": "father"}, {"from": "son", "to": "friend"}, {"from": "son", "to": "girl"}, {"from": "moment", "to": "thing"}, {"from": "moment", "to": "time"}, {"from": "much", "to": "little"}, {"from": "father", "to": "friend"}, {"from": "father", "to": "girl"}, {"from": "got", "to": "hey"}, {"from": "got", "to": "little"}, {"from": "marlin", "to": "dory"}, {"from": "marlin", "to": "turtle"}, {"from": "one", "to": "thing"}, {"from": "hyena", "to": "beast"}, {"from": "hyena", "to": "dog"}, {"from": "hyena", "to": "lion"}, {"from": "hyena", "to": "wallaby"}, {"from": "hyena", "to": "hare"}, {"from": "beast", "to": "lion"}, {"from": "dog", "to": "wallaby"}, {"from": "po", "to": "ho"}, {"from": "po", "to": "wa"}, {"from": "po", "to": "li"}, {"from": "po", "to": "gon"}, {"from": "po", "to": "na"}, {"from": "po", "to": "fa"}, {"from": "hey", "to": "thing"}, {"from": "hey", "to": "little"}, {"from": "hey", "to": "gon"}, {"from": "turtle", "to": "wallaby"}, {"from": "ho", "to": "li"}, {"from": "ho", "to": "gon"}, {"from": "ho", "to": "na"}, {"from": "ho", "to": "fa"}, {"from": "thing", "to": "way"}, {"from": "lion", "to": "hare"}, {"from": "wa", "to": "li"}, {"from": "wa", "to": "na"}, {"from": "wa", "to": "fa"}, {"from": "li", "to": "na"}, {"from": "li", "to": "fa"}, {"from": "li", "to": "xi"}, {"from": "gon", "to": "na"}, {"from": "na", "to": "fa"}, {"from": "na", "to": "ha"}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
