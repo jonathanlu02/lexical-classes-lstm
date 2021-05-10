@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 2000px;
+            height: 2000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"degree": 1, "group": "JJ", "id": "good", "label": "good", "shape": "dot", "size": 10}, {"degree": 1, "group": "JJ", "id": "great", "label": "great", "shape": "dot", "size": 10}, {"degree": 4, "group": "NN", "id": "man", "label": "man", "shape": "dot", "size": 10}, {"degree": 6, "group": "NN", "id": "mother", "label": "mother", "shape": "dot", "size": 10}, {"degree": 6, "group": "NN", "id": "son", "label": "son", "shape": "dot", "size": 10}, {"degree": 6, "group": "NN", "id": "father", "label": "father", "shape": "dot", "size": 10}, {"degree": 4, "group": "NN", "id": "girl", "label": "girl", "shape": "dot", "size": 10}, {"degree": 4, "group": "NN", "id": "family", "label": "family", "shape": "dot", "size": 10}, {"degree": 4, "group": "NN", "id": "friend", "label": "friend", "shape": "dot", "size": 10}, {"degree": 1, "group": "NN", "id": "sea", "label": "sea", "shape": "dot", "size": 10}, {"degree": 1, "group": "NN", "id": "ocean", "label": "ocean", "shape": "dot", "size": 10}, {"degree": 2, "group": "VB", "id": "come", "label": "come", "shape": "dot", "size": 10}, {"degree": 5, "group": "VBD", "id": "got", "label": "got", "shape": "dot", "size": 10}, {"degree": 2, "group": "VB", "id": "go", "label": "go", "shape": "dot", "size": 10}, {"degree": 5, "group": "VB", "id": "know", "label": "know", "shape": "dot", "size": 10}, {"degree": 4, "group": "NN", "id": "thought", "label": "thought", "shape": "dot", "size": 10}, {"degree": 5, "group": "NN", "id": "hey", "label": "hey", "shape": "dot", "size": 10}, {"degree": 3, "group": "JJ", "id": "little", "label": "little", "shape": "dot", "size": 10}, {"degree": 6, "group": "NN", "id": "thing", "label": "thing", "shape": "dot", "size": 10}, {"degree": 1, "group": "VBD", "id": "said", "label": "said", "shape": "dot", "size": 10}, {"degree": 4, "group": "NN", "id": "gon", "label": "gon", "shape": "dot", "size": 10}, {"degree": 2, "group": "NN", "id": "moment", "label": "moment", "shape": "dot", "size": 10}, {"degree": 1, "group": "CD", "id": "one", "label": "one", "shape": "dot", "size": 10}, {"degree": 1, "group": "NN", "id": "way", "label": "way", "shape": "dot", "size": 10}, {"degree": 2, "group": "NN", "id": "witch", "label": "witch", "shape": "dot", "size": 10}, {"degree": 7, "group": "NN", "id": "monkey", "label": "monkey", "shape": "dot", "size": 10}, {"degree": 2, "group": "NN", "id": "queen", "label": "queen", "shape": "dot", "size": 10}, {"degree": 6, "group": "NN", "id": "hyena", "label": "hyena", "shape": "dot", "size": 10}, {"degree": 3, "group": "NN", "id": "dog", "label": "dog", "shape": "dot", "size": 10}, {"degree": 3, "group": "NN", "id": "turtle", "label": "turtle", "shape": "dot", "size": 10}, {"degree": 4, "group": "NN", "id": "lion", "label": "lion", "shape": "dot", "size": 10}, {"degree": 4, "group": "NN", "id": "wallaby", "label": "wallaby", "shape": "dot", "size": 10}, {"degree": 3, "group": "NN", "id": "hare", "label": "hare", "shape": "dot", "size": 10}, {"degree": 1, "group": "NN", "id": "king", "label": "king", "shape": "dot", "size": 10}, {"degree": 3, "group": "NN", "id": "la", "label": "la", "shape": "dot", "size": 10}, {"degree": 7, "group": "NN", "id": "po", "label": "po", "shape": "dot", "size": 10}, {"degree": 7, "group": "NN", "id": "li", "label": "li", "shape": "dot", "size": 10}, {"degree": 8, "group": "NNS", "id": "na", "label": "na", "shape": "dot", "size": 10}, {"degree": 5, "group": "NN", "id": "ho", "label": "ho", "shape": "dot", "size": 10}, {"degree": 4, "group": "NN", "id": "wa", "label": "wa", "shape": "dot", "size": 10}, {"degree": 5, "group": "NN", "id": "fa", "label": "fa", "shape": "dot", "size": 10}, {"degree": 1, "group": "NN", "id": "xi", "label": "xi", "shape": "dot", "size": 10}, {"degree": 1, "group": "NN", "id": "ha", "label": "ha", "shape": "dot", "size": 10}, {"degree": 2, "group": "NN", "id": "beast", "label": "beast", "shape": "dot", "size": 10}, {"degree": 2, "group": "NN", "id": "marlin", "label": "marlin", "shape": "dot", "size": 10}, {"degree": 1, "group": "NN", "id": "time", "label": "time", "shape": "dot", "size": 10}, {"degree": 1, "group": "JJ", "id": "much", "label": "much", "shape": "dot", "size": 10}, {"degree": 1, "group": "NN", "id": "dory", "label": "dory", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"from": "good", "to": "great", "weight": 1}, {"from": "man", "to": "mother", "weight": 1}, {"from": "man", "to": "son", "weight": 1}, {"from": "man", "to": "father", "weight": 1}, {"from": "man", "to": "girl", "weight": 1}, {"from": "mother", "to": "family", "weight": 1}, {"from": "mother", "to": "son", "weight": 1}, {"from": "mother", "to": "father", "weight": 1}, {"from": "mother", "to": "friend", "weight": 1}, {"from": "mother", "to": "girl", "weight": 1}, {"from": "son", "to": "family", "weight": 1}, {"from": "son", "to": "father", "weight": 1}, {"from": "son", "to": "friend", "weight": 1}, {"from": "son", "to": "girl", "weight": 1}, {"from": "father", "to": "family", "weight": 1}, {"from": "father", "to": "friend", "weight": 1}, {"from": "father", "to": "girl", "weight": 1}, {"from": "sea", "to": "ocean", "weight": 1}, {"from": "come", "to": "got", "weight": 1}, {"from": "come", "to": "go", "weight": 1}, {"from": "got", "to": "know", "weight": 1}, {"from": "got", "to": "thought", "weight": 1}, {"from": "got", "to": "hey", "weight": 1}, {"from": "got", "to": "little", "weight": 1}, {"from": "go", "to": "know", "weight": 1}, {"from": "know", "to": "thought", "weight": 1}, {"from": "know", "to": "hey", "weight": 1}, {"from": "know", "to": "thing", "weight": 1}, {"from": "thought", "to": "said", "weight": 1}, {"from": "thought", "to": "thing", "weight": 1}, {"from": "hey", "to": "thing", "weight": 1}, {"from": "hey", "to": "little", "weight": 1}, {"from": "hey", "to": "gon", "weight": 1}, {"from": "thing", "to": "moment", "weight": 1}, {"from": "thing", "to": "one", "weight": 1}, {"from": "thing", "to": "way", "weight": 1}, {"from": "family", "to": "friend", "weight": 1}, {"from": "witch", "to": "monkey", "weight": 1}, {"from": "witch", "to": "queen", "weight": 1}, {"from": "monkey", "to": "hyena", "weight": 1}, {"from": "monkey", "to": "dog", "weight": 1}, {"from": "monkey", "to": "turtle", "weight": 1}, {"from": "monkey", "to": "lion", "weight": 1}, {"from": "monkey", "to": "wallaby", "weight": 1}, {"from": "monkey", "to": "hare", "weight": 1}, {"from": "queen", "to": "king", "weight": 1}, {"from": "la", "to": "po", "weight": 1}, {"from": "la", "to": "li", "weight": 1}, {"from": "la", "to": "na", "weight": 1}, {"from": "po", "to": "ho", "weight": 1}, {"from": "po", "to": "wa", "weight": 1}, {"from": "po", "to": "li", "weight": 1}, {"from": "po", "to": "gon", "weight": 1}, {"from": "po", "to": "na", "weight": 1}, {"from": "po", "to": "fa", "weight": 1}, {"from": "li", "to": "ho", "weight": 1}, {"from": "li", "to": "wa", "weight": 1}, {"from": "li", "to": "na", "weight": 1}, {"from": "li", "to": "fa", "weight": 1}, {"from": "li", "to": "xi", "weight": 1}, {"from": "na", "to": "ho", "weight": 1}, {"from": "na", "to": "wa", "weight": 1}, {"from": "na", "to": "gon", "weight": 1}, {"from": "na", "to": "fa", "weight": 1}, {"from": "na", "to": "ha", "weight": 1}, {"from": "hyena", "to": "beast", "weight": 1}, {"from": "hyena", "to": "dog", "weight": 1}, {"from": "hyena", "to": "lion", "weight": 1}, {"from": "hyena", "to": "wallaby", "weight": 1}, {"from": "hyena", "to": "hare", "weight": 1}, {"from": "dog", "to": "wallaby", "weight": 1}, {"from": "turtle", "to": "marlin", "weight": 1}, {"from": "turtle", "to": "wallaby", "weight": 1}, {"from": "lion", "to": "beast", "weight": 1}, {"from": "lion", "to": "hare", "weight": 1}, {"from": "moment", "to": "time", "weight": 1}, {"from": "much", "to": "little", "weight": 1}, {"from": "marlin", "to": "dory", "weight": 1}, {"from": "ho", "to": "gon", "weight": 1}, {"from": "ho", "to": "fa", "weight": 1}, {"from": "wa", "to": "fa", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
